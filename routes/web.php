@@ -23,6 +23,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/dashboard',  function () {
             return view('dashboard');
         })->name('dashboard.index');
+
+        Route::get('/users', 'UsersController@index')->name('users.index');
+        Route::get('/account-setting', 'AccountSettingController@index')->name('accountsetting.index');
+
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
     });
 });
