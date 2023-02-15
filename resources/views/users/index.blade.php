@@ -18,6 +18,7 @@
     <div class="block p-6 rounded-lg shadow-lg bg-white w-full flex justify-between items-center">
       <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
         <div class="overflow-auto pb-5">
+          <a href="{{ route('users.create') }}" class="button-primary mb-3">Tambah User</a>
           <table class="min-w-full">
             <thead class="border-b">
               <tr>
@@ -58,8 +59,13 @@
                   {{ $user->role }}
                 </td> --}}
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex flex-col gap-2">
-                  <a href="#" class="button-primary">Edit</a>
-                  <a href="#" class="button-danger">Hapus</a>
+                  <a href="{{ route('users.edit', $user->id) }}" class="button-primary">Edit</a>
+                  <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                    onsubmit="return confirm('Anda yakin ingin menghapus user ini?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="button-danger">Hapus</button>
+                  </form>
                 </td>
               </tr>
               @endforeach

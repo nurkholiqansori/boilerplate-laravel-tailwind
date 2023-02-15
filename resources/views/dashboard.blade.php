@@ -13,6 +13,14 @@
   <div class="flex justify-center w-full">
     <div class="block p-6 rounded-lg shadow-lg bg-white w-full flex justify-between items-center">
       <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center w-full">
+    <div class="block p-6 rounded-lg shadow-lg bg-white w-full flex justify-between items-center">
+      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
         <div class="overflow-auto pb-5">
           <table class="min-w-full">
             <thead class="border-b">
@@ -76,3 +84,58 @@
   </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            font: {
+              size: 14,
+              family: 'Montserrat, sans-serif'
+            },
+          }
+        },
+        x: {
+          ticks: {
+            font: {
+              size: 14,
+              family: 'Montserrat, sans-serif'
+            },
+          },
+          grid: {
+            color: 'red',
+            borderColor: 'grey',
+            tickColor: 'grey'
+          }
+        }
+      },
+      plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 14,
+                        family: 'Montserrat, sans-serif'
+                    }
+                }
+            }
+        }
+    }
+  });
+</script>
+@endpush

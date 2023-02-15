@@ -5,9 +5,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/', 'HomeController@index')->name('home.index');
 
-    // Route::get('/test', function () {
-    //     return view('_partials.messages');
-    // })->name('test.index');
     Route::group(['middleware' => ['guest']], function () {
         Route::get('/register', 'RegisterController@show')->name('register.index');
         Route::get('/login', 'LoginController@show')->name('login.index');
@@ -24,8 +21,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('dashboard');
         })->name('dashboard.index');
 
+        // Module User
         Route::get('/users', 'UsersController@index')->name('users.index');
+        Route::get('/users/create', 'UsersController@create')->name('users.create');
+        Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');
+        Route::get('/users/{id}/editpassword', 'UsersController@editpassword')->name('users.editpassword');
+
+        Route::post('/users', 'UsersController@store')->name('users.store');
+        Route::post('/users/{id}', 'UsersController@update')->name('users.update');
+        Route::post('/users/{id}/updatepassword', 'UsersController@updatepassword')->name('users.updatepassword');
+
+        Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destroy');
+        
+        // Module Account Setting
         Route::get('/account-setting', 'AccountSettingController@index')->name('accountsetting.index');
+
 
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
     });
